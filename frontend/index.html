@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Smart Feedback System
+    </title>
+
+    <link rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="page-shell">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="brand-group">
+
+                <img
+                    src="assets/hirotec-logo.webp"
+                    alt="HIROTEC Logo"
+                    class="logo">
+
+                <div>
+
+                    <h1>
+                        Smart Feedback System
+                    </h1>
+
+                    <p>
+                        Employee Feedback Portal - HIROTEC
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button
+                    id="darkModeToggle"
+                    class="button button-secondary">
+                    Dark Mode
+                </button>
+
+                <button
+                    id="adminBtn"
+                    class="button button-primary">
+                    Admin Panel
+                </button>
+
+                <button
+                    id="supportBtn"
+                    class="button button-secondary">
+                    Support
+                </button>
+
+                <button
+                    id="logoutBtn"
+                    class="button button-danger">
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- HERO -->
+
+        <section class="hero-card">
+
+            <div>
+
+                <h2>
+                    Employee Smart Feedback Portal
+                </h2>
+
+                <p>
+                    Submit workplace issues, technical problems,
+                    suggestions, and feedback securely to the
+                    Authorized Representative team.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- MAIN GRID -->
+
+        <main class="main-grid">
+
+            <!-- FORM -->
+
+            <section class="form-panel">
+
+                <div class="section-header">
+
+                    <h2>
+                        Submit Feedback
+                    </h2>
+
+                    <p>
+                        Fill the details below to register your
+                        complaint or suggestion.
+                    </p>
+
+                </div>
+
+                <form
+                    id="complaintForm"
+                    class="feedback-form">
+
+                    <div class="input-group">
+
+                        <label>
+                            Employee ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="employeeId"
+                            placeholder="EMP001"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="employeeName"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            Company Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="employeeEmail"
+                            placeholder="you@company.com"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            Contact Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="employeePhone"
+                            placeholder="9876543210"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <select
+                            id="department"
+                            required>
+
+                            <option value="">
+                                Select Department
+                            </option>
+
+                            <option value="Manufacturing">
+                                Manufacturing
+                            </option>
+
+                            <option value="Engineering">
+                                Engineering
+                            </option>
+
+                            <option value="Quality Assurance">
+                                Quality Assurance
+                            </option>
+
+                            <option value="Human Resources">
+                                Human Resources
+                            </option>
+
+                            <option value="Information Technology">
+                                Information Technology
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select
+                            id="category"
+                            required>
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="Technical">
+                                Technical Issue
+                            </option>
+
+                            <option value="Workplace">
+                                Workplace Issue
+                            </option>
+
+                            <option value="Safety">
+                                Safety Concern
+                            </option>
+
+                            <option value="Management">
+                                Management Issue
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="input-group full-width">
+
+                        <label>
+                            Issue Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="issueTitle"
+                            placeholder="Enter issue title"
+                            required>
+
+                    </div>
+
+                    <div class="input-group full-width">
+
+                        <label>
+                            Issue Description
+                        </label>
+
+                        <textarea
+                            id="issueDescription"
+                            maxlength="500"
+                            placeholder="Describe your issue..."
+                            required></textarea>
+
+                        <div class="char-count">
+
+                            <span id="charCount">
+                                0
+                            </span>/500
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            Priority
+                        </label>
+
+                        <select
+                            id="priority">
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                            <option value="Medium">
+                                Medium
+                            </option>
+
+                            <option value="High">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            &nbsp;
+                        </label>
+
+                        <button
+                            type="submit"
+                            class="button button-primary button-large">
+
+                            Submit Feedback
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+            <!-- PREVIEW -->
+
+            <section class="preview-panel">
+
+                <div class="section-header">
+
+                    <h2>
+                        Submission Preview
+                    </h2>
+
+                    <p>
+                        Recently submitted feedback preview.
+                    </p>
+
+                </div>
+
+                <div
+                    id="issueContainer"
+                    class="issue-list">
+
+                    <p>
+                        No feedback submitted yet.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- SUPPORT MODAL -->
+
+    <div
+        id="supportModal"
+        class="modal-overlay hidden">
+
+        <div class="modal-card">
+
+            <h2>
+                Support Details
+            </h2>
+
+            <p>
+                Contact the HIROTEC Support Team
+                for technical assistance.
+            </p>
+
+            <div style="text-align:left; margin-top:20px;">
+
+                 <p>
+                    <strong>Developer:</strong>
+                    JOHN DIVINE MATHEW J
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    mathewdivine95@gmail.com
+                </p>
+
+                <p>
+                    <strong>Phone & WhatsApp:</strong>
+                    +91 9626749641
+                </p>
+
+                <p>
+                    <strong>Department:</strong>
+                    Automation Team
+                </p>
+
+                <p>
+                    <strong>Working Hours:</strong>
+                    9:00 AM - 6:00 PM from Monday to Friday
+                </p>
+
+            </div>
+
+            <button
+                id="closeSupport"
+                class="button button-primary button-large"
+                style="margin-top:20px;">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast">
+    </div>
+
+    <!-- SCRIPT -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="frontend/css/style.css">
+</head>
+<body>
+    <div class="page-shell admin-shell">
+        <header class="topbar">
+            <div class="brand-group">
+                <img src="frontend/assets/hirotec-logo.webp" alt="HIROTEC Logo" class="logo">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    
+                </div>
+            </div>
+            <div class="top-actions">
+                <button id="notificationBell" class="button button-secondary icon-button">
+                     Notification<span id="notificationCount" class="badge">0</span>
+                </button>
+                <button id="darkModeToggle" class="button button-secondary">Dark Mode</button>
+                <button id="logoutBtn" class="button button-danger">Logout</button>
+            </div>
+        </header>
+
+        <div id="notificationPanel" class="notification-panel">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button id="clearNotifications" class="button button-text">Clear</button>
+            </div>
+            <div id="notificationList" class="notification-list"></div>
+        </div>
+
+        <div id="adminContent" class="admin-content hidden">
+            <section class="dashboard stats-row">
+                <div class="stat-card">
+                    <h3 id="totalIssuesAdmin">0</h3>
+                    <p>Total Complaints</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="pendingIssuesAdmin">0</h3>
+                    <p>Pending</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="resolvedIssuesAdmin">0</h3>
+                    <p>Resolved</p>
+                </div>
+            </section>
+
+            <section class="controls-row">
+                <div class="control-item">
+                    <label for="adminSearchInput">Search</label>
+                    <input id="adminSearchInput" type="search" placeholder="Search by name, title, ID...">
+                </div>
+                <div class="control-item">
+                    <label for="filterPriority">Priority</label>
+                    <select id="filterPriority">
+                        <option value="All">All</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+            </section>
+
+            <section id="adminIssueContainer" class="admin-issue-list"></section>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div id="adminLoginModal" class="modal-overlay">
+        <div class="modal-card">
+            <h2>Admin Login</h2>
+            <p>Enter the admin password to access the dashboard.</p>
+            <form id="adminLoginForm" class="login-form">
+                <input type="password" id="adminPassword" placeholder="Admin Password" required>
+                <button type="submit" class="button button-primary button-large">Login</button>
+            </form>
+            <div id="adminLoginError" class="field-error"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="frontend/js/admin.js"></script>
+</body>
+</html>
