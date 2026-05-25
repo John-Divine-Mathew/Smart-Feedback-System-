@@ -1,85 +1,337 @@
-﻿const API_URL = "http://localhost:5000/feedbacks";
+﻿const API_URL =
+"http://localhost:5000/feedbacks";
 
-if (localStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "login.html";
+/* =========================
+   LOGIN CHECK
+========================= */
+
+if (
+    localStorage.getItem("isLoggedIn")
+    !== "true"
+) {
+
+    window.location.href =
+    "login.html";
 }
 
-const complaintForm = document.getElementById("complaintForm");
-const issueContainer = document.getElementById("issueContainer");
-const toast = document.getElementById("toast");
-const darkModeToggle = document.getElementById("darkModeToggle");
-const adminBtn = document.getElementById("adminBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const issueDescription = document.getElementById("issueDescription");
-const charCount = document.getElementById("charCount");
+/* =========================
+   ELEMENTS
+========================= */
+
+const complaintForm =
+document.getElementById(
+    "complaintForm"
+);
+
+const issueContainer =
+document.getElementById(
+    "issueContainer"
+);
+
+const darkModeToggle =
+document.getElementById(
+    "darkModeToggle"
+);
+
+const adminBtn =
+document.getElementById(
+    "adminBtn"
+);
+
+const logoutBtn =
+document.getElementById(
+    "logoutBtn"
+);
+
+const supportBtn =
+document.getElementById(
+    "supportBtn"
+);
+
+const supportModal =
+document.getElementById(
+    "supportModal"
+);
+
+const closeSupport =
+document.getElementById(
+    "closeSupport"
+);
+
+const issueDescription =
+document.getElementById(
+    "issueDescription"
+);
+
+const charCount =
+document.getElementById(
+    "charCount"
+);
+
+const toast =
+document.getElementById(
+    "toast"
+);
 
 let toastTimeout;
 
-window.addEventListener("DOMContentLoaded", () => {
+/* =========================
+   PAGE LOAD
+========================= */
 
-    const darkMode = localStorage.getItem("darkMode");
+window.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    if(darkMode === "true"){
-        document.body.classList.add("dark-mode");
-        darkModeToggle.textContent = "Light Mode";
+        const darkMode =
+        localStorage.getItem(
+            "darkMode"
+        );
+
+        if (darkMode === "true") {
+
+            document.body.classList.add(
+                "dark-mode"
+            );
+
+            if(darkModeToggle){
+
+                darkModeToggle.textContent =
+                "Light Mode";
+            }
+        }
+
+        if(issueContainer){
+
+            issueContainer.innerHTML = `
+                <div style="text-align:center;">
+                    <h3>No Feedback Preview</h3>
+                    <p>
+                        Submit feedback to preview here.
+                    </p>
+                </div>
+            `;
+        }
     }
+);
 
-    issueContainer.innerHTML = `
-        <div style="text-align:center;">
-            <h3>No Feedback Preview</h3>
-            <p>Submit feedback to preview the complaint here.</p>
-        </div>
-    `;
-});
+/* =========================
+   CHARACTER COUNT
+========================= */
 
-issueDescription.addEventListener("input", () => {
-    charCount.textContent = issueDescription.value.length;
-});
+if(issueDescription){
 
-darkModeToggle.addEventListener("click", () => {
+    issueDescription.addEventListener(
+        "input",
+        function(){
 
-    document.body.classList.toggle("dark-mode");
+            charCount.textContent =
+            issueDescription.value.length;
+        }
+    );
+}
 
-    const enabled =
-    document.body.classList.contains("dark-mode");
+/* =========================
+   DARK MODE
+========================= */
 
-    localStorage.setItem("darkMode", enabled);
+if(darkModeToggle){
 
-    darkModeToggle.textContent =
-    enabled ? "Light Mode" : "Dark Mode";
-});
+    darkModeToggle.addEventListener(
+        "click",
+        function(){
 
-logoutBtn.addEventListener("click", () => {
+            document.body.classList.toggle(
+                "dark-mode"
+            );
 
-    localStorage.removeItem("isLoggedIn");
+            const enabled =
+            document.body.classList.contains(
+                "dark-mode"
+            );
 
-    window.location.href = "login.html";
-});
+            localStorage.setItem(
+                "darkMode",
+                enabled
+            );
 
-adminBtn.addEventListener("click", () => {
+            darkModeToggle.textContent =
+            enabled
+            ? "Light Mode"
+            : "Dark Mode";
+        }
+    );
+}
 
-    window.location.href = "../admin.html";
-});
+/* =========================
+   LOGOUT
+========================= */
 
-complaintForm.addEventListener("submit", handleSubmit);
+if(logoutBtn){
+
+    logoutBtn.addEventListener(
+        "click",
+        function(){
+
+            localStorage.removeItem(
+                "isLoggedIn"
+            );
+
+            sessionStorage.removeItem(
+                "adminLoggedIn"
+            );
+
+            window.location.href =
+            "login.html";
+        }
+    );
+}
+
+/* =========================
+   ADMIN BUTTON
+========================= */
+
+if(adminBtn){
+
+    adminBtn.addEventListener(
+        "click",
+        function(){
+
+            window.location.href =
+            "../admin.html";
+        }
+    );
+}
+
+/* =========================
+   SUPPORT MODAL OPEN
+========================= */
+
+if(
+    supportBtn &&
+    supportModal
+){
+
+    supportBtn.addEventListener(
+        "click",
+        function(){
+
+            supportModal.classList.remove(
+                "hidden"
+            );
+        }
+    );
+}
+
+/* =========================
+   SUPPORT MODAL CLOSE
+========================= */
+
+if(
+    closeSupport &&
+    supportModal
+){
+
+    closeSupport.addEventListener(
+        "click",
+        function(){
+
+            supportModal.classList.add(
+                "hidden"
+            );
+        }
+    );
+}
+
+/* =========================
+   CLOSE OUTSIDE MODAL
+========================= */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            supportModal &&
+            event.target === supportModal
+        ){
+
+            supportModal.classList.add(
+                "hidden"
+            );
+        }
+    }
+);
+
+/* =========================
+   FORM SUBMIT
+========================= */
+
+if(complaintForm){
+
+    complaintForm.addEventListener(
+        "submit",
+        handleSubmit
+    );
+}
 
 async function handleSubmit(event){
 
     event.preventDefault();
 
     const issue = {
+
         id: Date.now(),
-        employeeId: employeeId.value,
-        employeeName: employeeName.value,
-        employeeEmail: employeeEmail.value,
-        employeePhone: employeePhone.value,
-        department: department.value,
-        category: category.value,
-        issueTitle: issueTitle.value,
-        issueDescription: issueDescription.value,
-        priority: priority.value,
+
+        employeeId:
+        document.getElementById(
+            "employeeId"
+        ).value,
+
+        employeeName:
+        document.getElementById(
+            "employeeName"
+        ).value,
+
+        employeeEmail:
+        document.getElementById(
+            "employeeEmail"
+        ).value,
+
+        employeePhone:
+        document.getElementById(
+            "employeePhone"
+        ).value,
+
+        department:
+        document.getElementById(
+            "department"
+        ).value,
+
+        category:
+        document.getElementById(
+            "category"
+        ).value,
+
+        issueTitle:
+        document.getElementById(
+            "issueTitle"
+        ).value,
+
+        issueDescription:
+        document.getElementById(
+            "issueDescription"
+        ).value,
+
+        priority:
+        document.getElementById(
+            "priority"
+        ).value,
+
         status: "Pending",
-        timestamp: new Date().toISOString()
+
+        timestamp:
+        new Date().toISOString()
     };
 
     displayIssue(issue);
@@ -89,28 +341,46 @@ async function handleSubmit(event){
     await sendToServer(issue);
 
     showToast(
-        "Feedback submitted successfully!"
+        "Feedback submitted successfully"
     );
 
     complaintForm.reset();
 
-    charCount.textContent = "0";
+    if(charCount){
+
+        charCount.textContent = "0";
+    }
 }
+
+/* =========================
+   DISPLAY ISSUE
+========================= */
 
 function displayIssue(issue){
 
-    const priorityClass =
-    issue.priority === "High"
-    ? "tag-high"
-    : issue.priority === "Medium"
-    ? "tag-medium"
-    : "tag-low";
+    let priorityClass = "tag-low";
+
+    if(issue.priority === "High"){
+
+        priorityClass = "tag-high";
+    }
+    else if(
+        issue.priority === "Medium"
+    ){
+
+        priorityClass = "tag-medium";
+    }
 
     issueContainer.innerHTML = `
+
         <div class="issue-card">
-            <h3>${issue.issueTitle}</h3>
+
+            <h3>
+                ${issue.issueTitle}
+            </h3>
 
             <div class="tag-row">
+
                 <span class="tag ${priorityClass}">
                     ${issue.priority}
                 </span>
@@ -118,6 +388,7 @@ function displayIssue(issue){
                 <span class="tag tag-low">
                     ${issue.department}
                 </span>
+
             </div>
 
             <p>
@@ -139,26 +410,35 @@ function displayIssue(issue){
                 <strong>Status:</strong>
                 ${issue.status}
             </p>
+
         </div>
     `;
 
-    setTimeout(() => {
+    setTimeout(function(){
 
         issueContainer.innerHTML = `
             <div style="text-align:center;">
                 <h3>No Feedback Preview</h3>
-                <p>Submit feedback to preview the complaint here.</p>
+                <p>
+                    Submit feedback to preview here.
+                </p>
             </div>
         `;
 
-    },5000);
+    }, 5000);
 }
+
+/* =========================
+   SAVE LOCAL
+========================= */
 
 function saveIssue(issue){
 
     const issues =
     JSON.parse(
-        localStorage.getItem("issues")
+        localStorage.getItem(
+            "issues"
+        )
     ) || [];
 
     issues.push(issue);
@@ -169,16 +449,25 @@ function saveIssue(issue){
     );
 }
 
+/* =========================
+   SEND SERVER
+========================= */
+
 async function sendToServer(issue){
 
     try{
 
-        await fetch(API_URL,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
+        await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                "application/json"
             },
-            body:JSON.stringify(issue)
+
+            body:
+            JSON.stringify(issue)
         });
 
     }
@@ -187,12 +476,21 @@ async function sendToServer(issue){
         console.log(error);
 
         showToast(
-            "Saved locally. Server not connected."
+            "Saved locally. Server offline."
         );
     }
 }
 
+/* =========================
+   TOAST
+========================= */
+
 function showToast(message){
+
+    if(!toast){
+
+        return;
+    }
 
     toast.textContent = message;
 
@@ -200,64 +498,14 @@ function showToast(message){
 
     clearTimeout(toastTimeout);
 
-    toastTimeout = setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    },4000);
-}
-/* ================= SUPPORT MODAL ================= */
-
-const supportBtn =
-document.getElementById("supportBtn");
-
-const supportModal =
-document.getElementById("supportModal");
-
-const closeSupport =
-document.getElementById("closeSupport");
-
-if(supportBtn){
-
-    supportBtn.addEventListener(
-        "click",
+    toastTimeout = setTimeout(
         function(){
 
-            supportModal.classList.remove(
-                "hidden"
+            toast.classList.remove(
+                "show"
             );
 
-        }
+        },
+        4000
     );
-
 }
-
-if(closeSupport){
-
-    closeSupport.addEventListener(
-        "click",
-        function(){
-
-            supportModal.classList.add(
-                "hidden"
-            );
-
-        }
-    );
-
-}
-
-window.addEventListener(
-    "click",
-    function(event){
-
-        if(event.target === supportModal){
-
-            supportModal.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-);
