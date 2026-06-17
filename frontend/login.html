@@ -6,70 +6,106 @@
     <meta charset="UTF-8">
 
     <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0">
 
     <title>
-
-        Smart Feedback System Login
-       
-
+        Smart Feedback System | Login
     </title>
 
     <link rel="stylesheet"
-    href="css/login.css">
+        href="css/login.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
 </head>
 
 <body>
 
-    <div class="login-container">
+    <div class="login-page">
 
         <div class="login-card">
 
-            <img
-                src="assets/hirotec-logo.webp"
-                class="logo"    
-                alt="HIROTEC Logo"
-            >
+            <div class="logo-section">
+
+                <img
+                    src="assets/hirotec-logo.webp"
+                    class="logo"
+                    alt="HIROTEC Logo">
+
+            </div>
 
             <h1>
-
-            Smart Feedback System 
-
+                Smart Feedback System
             </h1>
 
-            <p>
-
-
+            <p class="subtitle">
+                Employee Feedback Portal - HIROTEC
             </p>
 
             <form id="loginForm">
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter Email"
-                    required
-                >
+                <div class="input-group">
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter Password"
-                    required
-                >
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your company email"
+                        required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required>
+
+                </div>
 
                 <button type="submit">
 
-                    Login
+                    Login to Dashboard
 
                 </button>
 
             </form>
 
+            <div class="demo-info">
+
+                <h4>Demo Credentials</h4>
+
+                <p>
+                    Email:
+                    <strong>
+                        mathewdivine95@gmail.com
+                    </strong>
+                </p>
+
+                <p>
+                    Password:
+                    <strong>
+                        1234
+                    </strong>
+                </p>
+
+            </div>
+
             <div id="errorMessage">
 
                 Invalid Email or Password
+
+            </div>
+
+            <div class="footer-text">
+
+                © 2026 HIROTEC India Pvt Ltd
 
             </div>
 
